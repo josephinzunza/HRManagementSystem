@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRManagementSystem"
+        xmlns:uc="clr-namespace:HRManagementSystem.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="75" MaxWidth="100" Width="1*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <uc:TopToolbar Grid.Column="0" Grid.ColumnSpan="2" />
+        <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="20" ToolTip="Home" />
+            <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="20" ToolTip="People" />
+            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="20" ToolTip="Reports" />
+            <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="15" ToolTip="Benefits" />
+            <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="20" ToolTip="Edit benefits, job titles, departments, etc."/>
+        </ListBox>
+        <Frame Grid.Column="1" Grid.Row="1" x:Name="navFrame" Background="#E9ECEF" />
+        
     </Grid>
 </Window>

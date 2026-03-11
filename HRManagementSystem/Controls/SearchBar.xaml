@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="HRManagementSystem.Controls.SearchBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRManagementSystem.Controls"
+             mc:Ignorable="d" 
+             x:Name="searchBar"
+             d:DesignHeight="80" d:DesignWidth="800">
+
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Height="40">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Canvas Grid.Column="0" Background="Transparent">
+                <Path Stretch="Fill" Width="40" Height="40" Stroke="LightGray" Data="{StaticResource searchIcon}" />
+            </Canvas>
+            <local:PlaceholderTextBox Grid.Column="1" BorderThickness="0"
+                                      PlaceholderText="{Binding ElementName=searchBar, Path=PlaceholderText}"/>
+        </Grid>
+    </Border>
+</UserControl>

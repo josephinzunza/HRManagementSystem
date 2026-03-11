@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:HRManagementSystem"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Images/Icons.xaml" />
+                <ResourceDictionary Source="/Images/Drawings.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
