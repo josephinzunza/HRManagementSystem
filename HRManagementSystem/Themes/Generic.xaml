@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:HRManagementSystem.Controls"
     xmlns:conv="clr-namespace:HRManagementSystem.Controls.Converters">
     <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <conv:AddLeftPaddingConverter x:Key="AddLeftPaddingConverter" />
     <Style TargetType="{x:Type local:NavButton}">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="Transparent" />
@@ -45,11 +46,12 @@
                 <ControlTemplate TargetType="{x:Type local:PlaceholderTextBox}">
                     <Grid>
                         <TextBlock x:Name="placeholderText" VerticalAlignment="Center" Background="Transparent"
-                                   Text="{TemplateBinding PlaceholderText}" Panel.ZIndex="1" Padding="5,0,0,0"
+                                   Padding="{TemplateBinding Padding, Converter={StaticResource AddLeftPaddingConverter}, ConverterParameter=3}"
+                                   Text="{TemplateBinding PlaceholderText}" Panel.ZIndex="1"
                                    FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="Gray"
                                    Visibility="{TemplateBinding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Gray"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
                             <ScrollViewer VerticalAlignment="Center" Name="PART_ContentHost" />
                         </Border>
                     </Grid>

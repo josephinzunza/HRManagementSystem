@@ -130,4 +130,14 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+
+    <DrawingImage x:Key="searchIconSvg">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V32 H32 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <GeometryDrawing Brush="Gray" Geometry="F0 M32,32z M0,0z M20,14C20,17.3125 17.3125,20 14,20 10.6875,20 8,17.3125 8,14 8,10.6875 10.6875,8 14,8 17.3125,8 20,10.6875 20,14z M18.90625,20.320312C17.550781,21.371094 15.847656,22 14,22 9.582031,22 6,18.417969 6,14 6,9.582031 9.582031,6 14,6 18.417969,6 22,9.582031 22,14 22,15.847656 21.371094,17.550781 20.320312,18.90625L26.707031,25.292969 25.292969,26.707031z M18.90625,20.320312" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

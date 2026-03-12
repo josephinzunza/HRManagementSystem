@@ -4,24 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRManagementSystem.Controls"
+             xmlns:conv="clr-namespace:HRManagementSystem.Controls.Converters"
              mc:Ignorable="d" 
              x:Name="searchBar"
              d:DesignHeight="80" d:DesignWidth="800">
-
-    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Height="40">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+    <Border BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" CornerRadius="8">
+        <Grid Height="{Binding ElementName=placeholderTextbox, Path=ActualHeight}" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-            <Canvas Grid.Column="0" x:Name="iconCanvas" Background="Transparent" >
-                <Path Fill="LightGray" Data="{StaticResource searchIcon}" Height="40" Width="40" Stretch="Fill"/>
-            </Canvas>
-            <local:PlaceholderTextBox Grid.Column="1" x:Name="placeholderTextbox" BorderThickness="0" VerticalAlignment="Stretch"
-                                      PlaceholderText="{Binding ElementName=searchBar, Path=PlaceholderText}"/>
+            <Image x:Name="icon" Source="{StaticResource searchIconSvg}" Grid.Row="1" HorizontalAlignment="Right" Margin="5,0"/>
+            <local:PlaceholderTextBox x:Name="placeholderTextbox" Grid.Row="0" Grid.RowSpan="3" BorderThickness="0"
+                                  FontSize="16" PlaceholderText="{Binding ElementName=searchBar, Path=PlaceholderText}" Padding="5,10"/>
         </Grid>
     </Border>
+
 </UserControl>
