@@ -23,10 +23,11 @@ namespace HRManagementSystem.Controls
         public SearchBar()
         {
             InitializeComponent();
+            FontHeight = Math.Ceiling(placeholderTextbox.FontSize * placeholderTextbox.FontFamily.LineSpacing);
         }
 
 
-
+        public double FontHeight { get; set; }
         public string PlaceholderText
         {
             get { return (string)GetValue(PlaceholderTextProperty); }

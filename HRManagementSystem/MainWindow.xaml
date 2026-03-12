@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HRManagementSystem"
         xmlns:uc="clr-namespace:HRManagementSystem.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="HRIS" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="75" MaxWidth="100" Width="1*"/>
@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
         <uc:TopToolbar Grid.Column="0" Grid.ColumnSpan="2" />
         <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-            <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="20" ToolTip="Home" />
-            <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="20" ToolTip="People" />
-            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="20" ToolTip="Reports" />
-            <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="15" ToolTip="Benefits" />
-            <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="20" ToolTip="Edit benefits, job titles, departments, etc."/>
+            <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="10" ToolTip="Home" />
+            <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="10" ToolTip="People" />
+            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="10" ToolTip="Reports" />
+            <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="10" ToolTip="Benefits" />
+            <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="10" ToolTip="Edit benefits, job titles, departments, etc."/>
         </ListBox>
         <Frame Grid.Column="1" Grid.Row="1" x:Name="navFrame" Background="#E9ECEF" />
         

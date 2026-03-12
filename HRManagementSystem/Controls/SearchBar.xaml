@@ -17,10 +17,10 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <Canvas Grid.Column="0" Background="Transparent">
-                <Path Stretch="Fill" Width="40" Height="40" Stroke="LightGray" Data="{StaticResource searchIcon}" />
+            <Canvas Grid.Column="0" x:Name="iconCanvas" Background="Transparent" >
+                <Path Fill="LightGray" Data="{StaticResource searchIcon}" Height="40" Width="40" Stretch="Fill"/>
             </Canvas>
-            <local:PlaceholderTextBox Grid.Column="1" BorderThickness="0"
+            <local:PlaceholderTextBox Grid.Column="1" x:Name="placeholderTextbox" BorderThickness="0" VerticalAlignment="Stretch"
                                       PlaceholderText="{Binding ElementName=searchBar, Path=PlaceholderText}"/>
         </Grid>
     </Border>
