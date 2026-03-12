@@ -20,8 +20,10 @@
         <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="10" ToolTip="Home" />
             <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="10" ToolTip="People" />
-            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="10" ToolTip="Reports" />
+            <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="10" ToolTip="People" />
+            <uc:NavButton IconGeometry="{StaticResource cashSignIcon}" Padding="10" ToolTip="Payroll" />
             <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="10" ToolTip="Benefits" />
+            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="10" ToolTip="Reports" />
             <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="10" ToolTip="Edit benefits, job titles, departments, etc."/>
         </ListBox>
         <Frame Grid.Column="1" Grid.Row="1" x:Name="navFrame" Background="#E9ECEF" />
