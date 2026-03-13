@@ -1,5 +1,4 @@
-﻿
-namespace HRManagementSystem.Models
+﻿namespace HRManagementSystem.Models
 {
     public class Employee
     {
