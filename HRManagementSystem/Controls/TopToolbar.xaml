@@ -15,7 +15,7 @@
             <ColumnDefinition MinWidth="75" MaxWidth="100" Width="1*" />
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Source="{StaticResource ResourceKey=companyLogo}" />
-        <local:SearchBar Grid.Column="1" Margin="5" PlaceholderText="Search employees" Height="50"/>
+        
         <DockPanel Grid.Column="3">
             <Menu DockPanel.Dock="Top" Margin="10, 0, 10, 10" Background="Transparent" HorizontalAlignment="Right">
                 <MenuItem Header="Profile">
