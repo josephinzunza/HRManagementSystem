@@ -2,7 +2,7 @@
 {
     public class InsurancePlan
     {
-        public ushort Id { get; set; }
+        public short Id { get; set; }
         public InsuranceCompany? InsuranceCompany { get; set; }
         public byte InsuranceCompanyId { get; set; }
         public PayableBenefit? PayableBenefit { get; set; }

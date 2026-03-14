@@ -2,9 +2,9 @@
 {
     public class Salary
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public Employee? Employee { get; set; }
-        public uint EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public bool IsHourly { get; set; }
         public decimal Amount { get; set; }
         public DateOnly StartDate { get; set; }

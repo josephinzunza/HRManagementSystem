@@ -2,7 +2,7 @@
 {
     public class Employee
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Address {  get; set; } = string.Empty;
@@ -14,11 +14,5 @@
         public string Email { get; set; } = string.Empty;
         public DateOnly DateOfBirth { get; set; }
         public string Gender {  get; set; } = string.Empty;
-    }
-
-    public class EmployeePicture
-    {
-        public uint EmployeeId { get; set; }
-        public byte[] ImageData { get; set; } = [];
     }
 }

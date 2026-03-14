@@ -2,7 +2,7 @@
 {
     public class WorkDay
     {
-        public ushort Id { get; set; }
+        public short Id { get; set; }
         public DateOnly Date {  get; set; }
     }
 }

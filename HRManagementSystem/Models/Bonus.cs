@@ -2,7 +2,7 @@
 {
     public class Bonus
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsPercent { get; set; }
         public decimal AmountOrPercent { get; set; }

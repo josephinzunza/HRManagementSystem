@@ -1,11 +1,10 @@
 ﻿namespace HRManagementSystem.Models
 {
-    public class User
+    public class EmployeePicture
     {
         public int Id { get; set; }
         public Employee? Employee { get; set; }
         public int EmployeeId { get; set; }
-        public string UserName { get; set; } = string.Empty;
-        public byte[] PasswordHash { get; set; } = [];
+        public byte[] ImageData { get; set; } = [];
     }
 }

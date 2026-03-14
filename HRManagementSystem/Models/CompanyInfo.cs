@@ -1,9 +1,9 @@
 ﻿namespace HRManagementSystem.Models
 {
-    public class Company
+    public class CompanyInfo
     {
         public string Name { get; set; } = string.Empty;
         public BusinessLocation? BusinessLocation { get; set; }
-        public ushort BusinessLocationId { get; set; }
+        public short BusinessLocationId { get; set; }
     }
 }

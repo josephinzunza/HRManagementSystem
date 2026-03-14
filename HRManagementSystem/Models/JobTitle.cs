@@ -2,7 +2,7 @@
 {
     public class JobTitle
     {
-        public ushort Id { get; set; }
+        public short Id { get; set; }
         public Department? Department { get; set; }
         public byte DepartmentId { get; set; }
         public string Name { get; set; } = string.Empty;
