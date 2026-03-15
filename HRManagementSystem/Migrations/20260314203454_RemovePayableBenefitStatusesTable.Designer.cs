@@ -4,6 +4,7 @@ using HRManagementSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementSystem.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260314203454_RemovePayableBenefitStatusesTable")]
+    partial class RemovePayableBenefitStatusesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,21 +340,6 @@ namespace HRManagementSystem.Migrations
                     b.ToTable("EmployeeContributableAccounts");
                 });
 
-            modelBuilder.Entity("HRManagementSystem.Models.EmployeeDeclinedPayableBenefit", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("PayableBenefitId")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("EmployeeId", "PayableBenefitId");
-
-                    b.HasIndex("PayableBenefitId");
-
-                    b.ToTable("EmployeeDeclinedPayableBenefits");
-                });
-
             modelBuilder.Entity("HRManagementSystem.Models.EmployeeDeduction", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -415,6 +403,21 @@ namespace HRManagementSystem.Migrations
                     b.HasIndex("JobTitleId");
 
                     b.ToTable("EmployeeJobTitle");
+                });
+
+            modelBuilder.Entity("HRManagementSystem.Models.EmployeePayableBenefitStatus", b =>
+                {
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("PayableBenefitId")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("EmployeeId", "PayableBenefitId");
+
+                    b.HasIndex("PayableBenefitId");
+
+                    b.ToTable("EmployeePayableBenefitStatuses");
                 });
 
             modelBuilder.Entity("HRManagementSystem.Models.EmployeePicture", b =>
@@ -837,8 +840,8 @@ namespace HRManagementSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -924,9 +927,6 @@ namespace HRManagementSystem.Migrations
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
-
-                    b.Property<bool>("HasIncomeTax")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1180,25 +1180,6 @@ namespace HRManagementSystem.Migrations
                     b.Navigation("PayableBenefit");
                 });
 
-            modelBuilder.Entity("HRManagementSystem.Models.EmployeeDeclinedPayableBenefit", b =>
-                {
-                    b.HasOne("HRManagementSystem.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HRManagementSystem.Models.PayableBenefit", "PayableBenefit")
-                        .WithMany()
-                        .HasForeignKey("PayableBenefitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("PayableBenefit");
-                });
-
             modelBuilder.Entity("HRManagementSystem.Models.EmployeeDeduction", b =>
                 {
                     b.HasOne("HRManagementSystem.Models.Deduction", "Deduction")
@@ -1254,6 +1235,25 @@ namespace HRManagementSystem.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("JobTitle");
+                });
+
+            modelBuilder.Entity("HRManagementSystem.Models.EmployeePayableBenefitStatus", b =>
+                {
+                    b.HasOne("HRManagementSystem.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRManagementSystem.Models.PayableBenefit", "PayableBenefit")
+                        .WithMany()
+                        .HasForeignKey("PayableBenefitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("PayableBenefit");
                 });
 
             modelBuilder.Entity("HRManagementSystem.Models.EmployeePicture", b =>

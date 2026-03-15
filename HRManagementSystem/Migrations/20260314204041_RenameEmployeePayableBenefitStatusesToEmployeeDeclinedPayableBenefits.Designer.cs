@@ -4,6 +4,7 @@ using HRManagementSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementSystem.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260314204041_RenameEmployeePayableBenefitStatusesToEmployeeDeclinedPayableBenefits")]
+    partial class RenameEmployeePayableBenefitStatusesToEmployeeDeclinedPayableBenefits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -837,8 +840,8 @@ namespace HRManagementSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -924,9 +927,6 @@ namespace HRManagementSystem.Migrations
                 {
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
-
-                    b.Property<bool>("HasIncomeTax")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -39,7 +39,7 @@ namespace HRManagementSystem
             modelBuilder.Entity<EmployeeJobTitle>().HasKey(ejt => new { ejt.EmployeeId, ejt.JobTitleId });
 
             // Configure the composite primary key for the EmployeePayableBenefitStatuses junction table
-            modelBuilder.Entity<EmployeePayableBenefitStatus>().HasKey(epbs => new { epbs.EmployeeId, epbs.PayableBenefitId, epbs.PayableBenefitStatusId });
+            modelBuilder.Entity<EmployeeDeclinedPayableBenefit>().HasKey(epbs => new { epbs.EmployeeId, epbs.PayableBenefitId });
 
             // Configure the composite primary key for the FixedScheduleEmployees junction table
             modelBuilder.Entity<FixedScheduleEmployee>().HasKey(fse => new { fse.FixedScheduleId, fse.EmployeeId });
@@ -162,11 +162,7 @@ namespace HRManagementSystem
 
             // Set varchar size on PayableBenefits string properties
             modelBuilder.Entity<PayableBenefit>(entity =>
-                    entity.Property(pb => pb.Name).HasMaxLength(30));
-
-            // Set varchar size on PayableBenefitStatuses string properties
-            modelBuilder.Entity<PayableBenefitStatus>(entity =>
-                    entity.Property(pbs => pbs.Name).HasMaxLength(20));
+                    entity.Property(pb => pb.Name).HasMaxLength(50));
 
             // Set varchar size on PaymentPeriodTypes string properties
             modelBuilder.Entity<PaymentPeriodType>(entity =>
@@ -220,7 +216,7 @@ namespace HRManagementSystem
         public DbSet<EmployeeDeduction> EmployeeDeductions { get; set; }
         public DbSet<EmployeeInsurancePlan> EmployeeInsurancePlans { get; set; }
         public DbSet<EmployeeJobTitle> EmployeeJobTitle { get; set; }
-        public DbSet<EmployeePayableBenefitStatus> EmployeePayableBenefitStatuses { get; set; }
+        public DbSet<EmployeeDeclinedPayableBenefit> EmployeeDeclinedPayableBenefits { get; set; }
         public DbSet<EmployeePicture> EmployeePictures { get; set; }
         public DbSet<EmployeeShift> EmployeeShifts { get; set; }
         public DbSet<EmployeeTimeOffUse> EmployeeTimeOffUses { get; set; }
@@ -237,7 +233,6 @@ namespace HRManagementSystem
         public DbSet<JobTitleTimeOffType> JobTitleTimeOffTypes { get; set; }
         public DbSet<LocalTax> LocalTaxes { get; set; }
         public DbSet<PayableBenefit> PayableBenefits { get; set; }
-        public DbSet<PayableBenefitStatus> PayableBenefitsStatuses { get; set; }
         public DbSet<PaymentPeriodType> PaymentPeriodTypes { get; set; }
         public DbSet<PayrollInfo> PayrollInfos { get; set; }
         public DbSet<Salary> Salaries { get; set; }
