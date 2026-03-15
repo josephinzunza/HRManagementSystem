@@ -4,6 +4,7 @@ using HRManagementSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementSystem.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260315165132_MoveIsAccruableColumnFromTimeOffTypesToJobtitleTimeOffTypes")]
+    partial class MoveIsAccruableColumnFromTimeOffTypesToJobtitleTimeOffTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -771,13 +774,13 @@ namespace HRManagementSystem.Migrations
                     b.Property<byte>("TimeOffTypeId")
                         .HasColumnType("tinyint");
 
-                    b.Property<short>("AllowedYearlyCarryoverHours")
-                        .HasColumnType("smallint");
-
                     b.Property<bool>("IsAccruable")
                         .HasColumnType("bit");
 
                     b.Property<short>("MaxHours")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("MaxYearlyCarryover")
                         .HasColumnType("smallint");
 
                     b.Property<bool>("PayOnTermination")
@@ -786,8 +789,8 @@ namespace HRManagementSystem.Migrations
                     b.Property<bool>("PayOnUse")
                         .HasColumnType("bit");
 
-                    b.Property<short>("WorkHoursToOneHourOff")
-                        .HasColumnType("smallint");
+                    b.Property<byte>("WorkHoursToOneHourOff")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("JobTitleId", "TimeOffTypeId");
 
