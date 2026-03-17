@@ -4,6 +4,7 @@ using HRManagementSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementSystem.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260316215806_ChangePhoneToPhoneNumberColumnInEmployeesTable")]
+    partial class ChangePhoneToPhoneNumberColumnInEmployeesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -409,9 +412,6 @@ namespace HRManagementSystem.Migrations
 
                     b.Property<short>("JobTitleId")
                         .HasColumnType("smallint");
-
-                    b.Property<bool>("IsCurrentTitle")
-                        .HasColumnType("bit");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HRManagementSystem"
         xmlns:uc="clr-namespace:HRManagementSystem.Controls"
         mc:Ignorable="d"
-        Title="HRIS" Height="450" Width="800">
+        Title="HRIS" Height="450" Width="800">        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="75" MaxWidth="100" Width="1*"/>

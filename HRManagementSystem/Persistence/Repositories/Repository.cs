@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HRManagementSystem.Repositories
+namespace HRManagementSystem.Persistence.Repositories
 {
     public class Repository<TEnity>(DbContext dbContext) : IRepository<TEnity> where TEnity : class
     {

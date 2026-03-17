@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace HRManagementSystem.Repositories
+namespace HRManagementSystem.Persistence.Repositories
 {
     public interface IRepository<TEnity> where TEnity : class
     {

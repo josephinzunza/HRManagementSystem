@@ -88,7 +88,7 @@ namespace HRManagementSystem
                 entity.Property(e => e.Address).HasMaxLength(50);
                 entity.Property(e => e.City).HasMaxLength(50);
                 entity.Property(e => e.ZipCode).HasColumnType("char(5)");
-                entity.Property(e => e.Phone).HasColumnType("char(10)");
+                entity.Property(e => e.PhoneNumber).HasColumnType("char(10)");
                 entity.Property(e => e.Email).HasMaxLength(128);
                 entity.Property(e => e.Gender).HasMaxLength(30);
             });

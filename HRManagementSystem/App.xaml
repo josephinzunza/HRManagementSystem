@@ -7,8 +7,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Images/Icons.xaml" />
-                <ResourceDictionary Source="/Images/Drawings.xaml" />
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Resources/Drawings.xaml" />
+                <ResourceDictionary Source="/Resources/Fonts.xaml" />
+                <ResourceDictionary Source="/Resources/GlobalStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

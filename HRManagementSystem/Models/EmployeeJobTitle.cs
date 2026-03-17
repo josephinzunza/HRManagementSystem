@@ -8,5 +8,6 @@ namespace HRManagementSystem.Models
         public JobTitle? JobTitle { get; set; }
         public short JobTitleId { get; set; }
         public DateOnly StartDate { get; set; }
+        public bool IsCurrentTitle { get; set; }
     }
 }

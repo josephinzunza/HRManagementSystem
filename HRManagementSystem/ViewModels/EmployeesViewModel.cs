@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Controls;
+﻿using HRManagementSystem.Persistence.Repositories;
+using System.Collections.ObjectModel;
 
 namespace HRManagementSystem.ViewModels
 {
-    class EmployeeViewModel
+    public class EmployeeViewModel
     {
-        public Image ProfilePicture { get; set; } = new();
+        public byte[] ProfilePicture { get; set; } = [];
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -13,8 +13,22 @@ namespace HRManagementSystem.ViewModels
         public string Department { get; set; } = string.Empty;
     }
 
-    class EmployeesViewModel
+    public class EmployeesViewModel
     {
+        private readonly IEmployeeRepository _repository;
         public ObservableCollection<EmployeeViewModel> Employees { get; set; } = [];
+        public EmployeesViewModel(IEmployeeRepository repository)
+        {
+            _repository = repository;
+            LoadData();
+        }
+        private void LoadData()
+        {
+            var data = _repository.GetAllActiveEmployeesWithDeptAndPfp();
+            foreach(EmployeeViewModel employee in data)
+            {
+                Employees.Add(employee);
+            }
+        }
     }
 }

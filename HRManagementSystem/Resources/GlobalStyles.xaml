@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type Control}" x:Key="baseControlStyle">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource baseControlStyle}">
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Background" Value="#2a84f1" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style TargetType="{x:Type FrameworkElement}" x:Key="baseFrameworkElementStyle">
+        <Setter Property="TextElement.FontSize" Value="14"/>
+        <Setter Property="TextElement.FontFamily" Value="{StaticResource RobotoLight}" />
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource baseFrameworkElementStyle}"></Style>
+</ResourceDictionary>

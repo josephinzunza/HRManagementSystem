@@ -10,7 +10,7 @@
         public string ZipCode { get; set; } = string.Empty;
         public State? State { get; set; }
         public byte StateId { get; set; }
-        public string Phone { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public DateOnly DateOfBirth { get; set; }
         public string Gender {  get; set; } = string.Empty;

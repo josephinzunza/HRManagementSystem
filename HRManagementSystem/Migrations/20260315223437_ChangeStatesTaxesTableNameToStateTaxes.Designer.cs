@@ -4,6 +4,7 @@ using HRManagementSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementSystem.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260315223437_ChangeStatesTaxesTableNameToStateTaxes")]
+    partial class ChangeStatesTaxesTableNameToStateTaxes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,15 +250,12 @@ namespace HRManagementSystem.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("char(10)");
 
@@ -409,9 +409,6 @@ namespace HRManagementSystem.Migrations
 
                     b.Property<short>("JobTitleId")
                         .HasColumnType("smallint");
-
-                    b.Property<bool>("IsCurrentTitle")
-                        .HasColumnType("bit");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
@@ -571,13 +568,16 @@ namespace HRManagementSystem.Migrations
                     b.Property<byte>("Id")
                         .HasColumnType("tinyint");
 
+                    b.Property<bool>("IsAppliedBasedOnRule")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(4,2)");
+                        .HasColumnType("decimal(5,3)");
 
                     b.HasKey("Id");
 
@@ -780,6 +780,9 @@ namespace HRManagementSystem.Migrations
                     b.Property<short>("AllowedYearlyCarryoverHours")
                         .HasColumnType("smallint");
 
+                    b.Property<bool>("EnsureYearlyStartingHoursMinimum")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsAccruable")
                         .HasColumnType("bit");
 
@@ -791,6 +794,9 @@ namespace HRManagementSystem.Migrations
 
                     b.Property<bool>("PayOnUse")
                         .HasColumnType("bit");
+
+                    b.Property<short>("StartingHours")
+                        .HasColumnType("smallint");
 
                     b.Property<short>("WorkHoursToOneHourOff")
                         .HasColumnType("smallint");
@@ -824,7 +830,7 @@ namespace HRManagementSystem.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("RateOrAmount")
-                        .HasColumnType("decimal(9,2)");
+                        .HasColumnType("decimal(9,3)");
 
                     b.Property<byte>("StateId")
                         .HasColumnType("tinyint");
@@ -957,8 +963,11 @@ namespace HRManagementSystem.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("IsAppliedBasedOnRule")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(4,2)");
+                        .HasColumnType("decimal(5,3)");
 
                     b.Property<byte>("StateId")
                         .HasColumnType("tinyint");
@@ -967,7 +976,7 @@ namespace HRManagementSystem.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("StatesTaxes");
+                    b.ToTable("StateTaxes");
                 });
 
             modelBuilder.Entity("HRManagementSystem.Models.TimeOffType", b =>
