@@ -15,5 +15,10 @@ namespace HRManagementSystem.Views
 
             DataContext = new EmployeesViewModel(new EmployeeRepository(new HRMSDbContext()));
         }
+        private void AddPersonButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow();
+            newEmployeeWindow.ShowDialog();
+        }
     }
 }
