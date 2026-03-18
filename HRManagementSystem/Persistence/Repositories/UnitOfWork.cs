@@ -6,6 +6,8 @@
 
         public IEmployeeRepository Employees { get; private set; } = new EmployeeRepository(hrmsDbContext);
 
+        public IStateRepository States => new StateRepository(HRMSDbContext);
+
         public int Complete()
         {
             return HRMSDbContext.SaveChanges();

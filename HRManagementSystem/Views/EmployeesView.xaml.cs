@@ -17,7 +17,7 @@ namespace HRManagementSystem.Views
         }
         private void AddPersonButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow();
+            NewEmployeeWindow newEmployeeWindow = new();
             newEmployeeWindow.ShowDialog();
         }
     }

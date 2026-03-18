@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRManagementSystem.Views"
         xmlns:uc="clr-namespace:HRManagementSystem.Controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vr="clr-namespace:HRManagementSystem.ViewModels.Validation"
         mc:Ignorable="d"
-        Title="Add New Employee" Height="600" Width="400">
+        Title="Add a New Employee" Height="600" Width="500"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
@@ -45,47 +48,89 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Personal Information" FontWeight="Bold" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" FontSize="18" Margin="0,10"/>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" FontSize="18" Margin="0,10">
+                Personal Information
+            </TextBlock>
             
-            <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="First Name:"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="First Name:" />
+            <TextBox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5" MaxLength="128">
+                <TextBox.Text>
+                    <Binding Path="FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vr:RequiredFieldValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="1" Content="Last Name:"/>
-            <TextBox Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5" MaxLength="128"
+                     Text="{Binding LastName, Mode=OneWayToSource}" />
 
-            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Content="Date of Birth:"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" BorderThickness="1" Margin="5"/>
+            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Content="Date of Birth:" />
+            <DatePicker Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="5"
+                        Text="{Binding FirstName, Mode=OneWayToSource}"/>
 
-            <Label Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3" Content="Gender:"/>
-            <ComboBox  Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="4" Margin="5" IsEditable="False" />
+            <Label Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3" Content="Gender:" />
+            <ComboBox x:Name="genderComboBox"  Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="4" Margin="5" IsEditable="False"
+                      ItemsSource="{Binding Genders}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GenderSelectionChangedCommand}"
+                                               CommandParameter="{Binding ElementName=genderComboBox, Path=SelectedIndex}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
 
+            <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="3" Content="Gender (specify):" />
+            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" BorderThickness="1" Margin="5" MaxLength="30"
+                     Text="{Binding GenderOther, Mode=TwoWay}" IsEnabled="{Binding IsGenderOtherEnabled}"/>
 
-            <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="3" Content="Gender (specify):"/>
-            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" BorderThickness="1" Margin="5"/>
-
-            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="5" Text="Contact Information" FontWeight="Bold" FontSize="18" Margin="0,10"/>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="5"
+                       FontWeight="Bold" FontSize="18" Margin="0,10">
+                Contact Information
+            </TextBlock>
 
             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="Phone Number:"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" BorderThickness="1" Margin="5" MaxLength="10"
+                     Text="{Binding PhoneNumber, Mode=OneWayToSource}"/>
 
             <Label Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="6" Content="Email:"/>
-            <TextBox Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="7" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="7" BorderThickness="1" Margin="5" MaxLength="128"
+                     Text="{Binding Email, Mode=OneWayToSource}"/>
 
-            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="8" Text="Address" FontWeight="Bold" FontSize="18" Margin="0,10"/>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="8"
+                       FontWeight="Bold" FontSize="18" Margin="0,10">
+                Address
+            </TextBlock>
 
             <Label Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="9" Content="Street Address:"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="10" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="10" BorderThickness="1" Margin="5" MaxLength="50"
+                     Text="{Binding Address, Mode=OneWayToSource}"/>
 
             <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="9" Content="City:"/>
-            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="10" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="10" BorderThickness="1" Margin="5" MaxLength="50"
+                     Text="{Binding City, Mode=OneWayToSource}"/>
 
-            <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="11" Content="Sate:"/>
-            <ComboBox  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="12" Margin="5" IsEditable="False" />
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11" Content="Sate:"/>
+            <ComboBox  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12" Margin="5" IsEditable="False"
+                       ItemsSource="{Binding States}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedState, Mode=OneWayToSource}"/>
 
             <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="11" Content="Zip Code:"/>
-            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="12" BorderThickness="1" Margin="5"/>
+            <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="12" BorderThickness="1" Margin="5" MaxLength="5"
+                     Text="{Binding ZipCode, Mode=OneWayToSource}"/>
 
+            <Button Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="14" Margin="5">
+                Save
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding AddNewEmployeeCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
 
         </Grid>
     </Grid>
