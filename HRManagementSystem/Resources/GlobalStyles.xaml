@@ -16,7 +16,7 @@
         </Style.Resources>
     </Style>
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseControlStyle}"></Style>
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource baseControlStyle}">
+    <Style x:Key="baseTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource baseControlStyle}">
         <Setter Property="Padding" Value="0,5" />
         <Style.Resources>
             <Style TargetType="Border">

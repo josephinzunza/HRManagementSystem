@@ -11,14 +11,15 @@ namespace HRManagementSystem.ViewModels.Extensions
             {
                 FirstName = newEmployeeVM.FirstName,
                 LastName = newEmployeeVM.LastName,
-                DateOfBirth = newEmployeeVM.DateOfBirth,
+                DateOfBirth = newEmployeeVM.DateOfBirth ?? default,
                 Gender = newEmployeeVM.Gender == "Other (specify)" ? newEmployeeVM.GenderOther : newEmployeeVM.Gender,
                 PhoneNumber = newEmployeeVM.PhoneNumber,
                 Email = newEmployeeVM.Email,
                 Address = newEmployeeVM.Address,
                 City = newEmployeeVM.City,
-                StateId = newEmployeeVM.SelectedState.Id,
+                StateId = newEmployeeVM.SelectedState == null ? (byte)0 : newEmployeeVM.SelectedState.Id,
                 ZipCode = newEmployeeVM.ZipCode,
+                IsActive = true
             };
         }
     }

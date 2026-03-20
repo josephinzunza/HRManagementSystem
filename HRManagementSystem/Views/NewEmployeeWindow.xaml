@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vr="clr-namespace:HRManagementSystem.ViewModels.Validation"
         mc:Ignorable="d"
-        Title="Add a New Employee" Height="600" Width="500"
+        Title="Add a New Employee" Height="700" Width="600"
         ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -56,27 +56,20 @@
             </TextBlock>
             
             <Label Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Content="First Name:" />
-            <TextBox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5" MaxLength="128">
-                <TextBox.Text>
-                    <Binding Path="FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <vr:RequiredFieldValidationRule />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+            <uc:PlaceholderTextBox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5" MaxLength="128"
+                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Enter first name" />
 
             <Label Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="1" Content="Last Name:"/>
             <TextBox Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="2" BorderThickness="1" Margin="5" MaxLength="128"
-                     Text="{Binding LastName, Mode=OneWayToSource}" />
+                     Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Content="Date of Birth:" />
             <DatePicker Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="5"
-                        Text="{Binding FirstName, Mode=OneWayToSource}"/>
+                        Text="{Binding DateOfBirth}"/>
 
             <Label Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3" Content="Gender:" />
             <ComboBox x:Name="genderComboBox"  Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="4" Margin="5" IsEditable="False"
-                      ItemsSource="{Binding Genders}">
+                      ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding GenderSelectionChangedCommand}"
@@ -95,12 +88,12 @@
             </TextBlock>
 
             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="Phone Number:"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" BorderThickness="1" Margin="5" MaxLength="10"
-                     Text="{Binding PhoneNumber, Mode=OneWayToSource}"/>
+            <uc:ValidationPhoneNumberTextBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7"
+                                  PhoneNumber="{Binding PhoneNumber, Mode=TwoWay}" />
 
             <Label Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="6" Content="Email:"/>
             <TextBox Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="7" BorderThickness="1" Margin="5" MaxLength="128"
-                     Text="{Binding Email, Mode=OneWayToSource}"/>
+                     Text="{Binding Email}"/>
 
             <TextBlock Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="8"
                        FontWeight="Bold" FontSize="18" Margin="0,10">
@@ -109,19 +102,19 @@
 
             <Label Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="9" Content="Street Address:"/>
             <TextBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="10" BorderThickness="1" Margin="5" MaxLength="50"
-                     Text="{Binding Address, Mode=OneWayToSource}"/>
+                     Text="{Binding Address}"/>
 
             <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="9" Content="City:"/>
             <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="10" BorderThickness="1" Margin="5" MaxLength="50"
-                     Text="{Binding City, Mode=OneWayToSource}"/>
+                     Text="{Binding City}"/>
 
             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="11" Content="Sate:"/>
             <ComboBox  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="12" Margin="5" IsEditable="False"
-                       ItemsSource="{Binding States}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedState, Mode=OneWayToSource}"/>
+                       ItemsSource="{Binding States}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedState}"/>
 
             <Label Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="11" Content="Zip Code:"/>
             <TextBox Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="12" BorderThickness="1" Margin="5" MaxLength="5"
-                     Text="{Binding ZipCode, Mode=OneWayToSource}"/>
+                     Text="{Binding ZipCode}"/>
 
             <Button Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="14" Margin="5">
                 Save

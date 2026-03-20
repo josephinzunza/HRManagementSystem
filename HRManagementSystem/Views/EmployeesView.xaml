@@ -33,7 +33,7 @@
             <TextBlock Grid.Column="0" Foreground="Black" FontSize="30" Margin="0,20">People</TextBlock>
 
         </Grid>
-        <uc:SearchBar Grid.Row="1" />
+        <uc:SearchBar Grid.Row="1" PlaceholderText="Search employees..." VerticalAlignment="Center" />
         <Button Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
                 x:Name="AddPersonButton" Click="AddPersonButton_Click">Add Person</Button>
         <Grid  Grid.ColumnSpan="2" Grid.Row="2">

@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace HRManagementSystem.Controls
 {
@@ -43,17 +42,12 @@ namespace HRManagementSystem.Controls
     /// Step 2)
     /// Go ahead and use your control in the XAML file.
     ///
-    ///     <MyNamespace:PlaceholderTextBox/>
+    ///     <MyNamespace:ValidationTextBox/>
     ///
     /// </summary>
-    public class PlaceholderTextBox : TextBox, INotifyPropertyChanged
+    public class ValidationTextBox : TextBox, INotifyPropertyChanged
     {
-        static PlaceholderTextBox()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PlaceholderTextBox), new FrameworkPropertyMetadata(typeof(PlaceholderTextBox)));
-        }
-
-        public PlaceholderTextBox() : base()
+        public ValidationTextBox() : base()
         {
             IsPlaceholderVisible = string.IsNullOrWhiteSpace(Text);
         }
@@ -69,6 +63,7 @@ namespace HRManagementSystem.Controls
                 OnPropertyChanged(nameof(IsPlaceholderVisible));
             }
         }
+
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             IsPlaceholderVisible = string.IsNullOrWhiteSpace(Text);
@@ -83,9 +78,14 @@ namespace HRManagementSystem.Controls
 
         // Using a DependencyProperty as the backing store for PlaceholderText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlaceholderTextProperty =
-            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(PlaceholderTextBox), new PropertyMetadata(""));
+            DependencyProperty.Register("PlaceholderText", typeof(string), typeof(ValidationTextBox), new PropertyMetadata(""));
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        static ValidationTextBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ValidationTextBox), new FrameworkPropertyMetadata(typeof(ValidationTextBox)));
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

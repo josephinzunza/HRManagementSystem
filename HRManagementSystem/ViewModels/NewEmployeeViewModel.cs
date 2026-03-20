@@ -1,35 +1,60 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HRManagementSystem.Models;
 using HRManagementSystem.Persistence.Repositories;
 using HRManagementSystem.ViewModels.Extensions;
-using System.Collections;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRManagementSystem.ViewModels
 {
-    public partial class NewEmployeeViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+    public partial class NewEmployeeViewModel : ObservableValidator
     {
-        private readonly IUnitOfWork UnitOfWork;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-
-        private readonly Dictionary<string, List<string>> propertyErrors = [];
+        private readonly IUnitOfWork unitOfWork;
 
         public NewEmployeeViewModel(IUnitOfWork unitOfWork)
         {
-            UnitOfWork = unitOfWork;
-            States = UnitOfWork.States.GetAll();
+            this.unitOfWork = unitOfWork;
+            States = this.unitOfWork.States.GetAll();
         }
         // Data sources
         public IEnumerable<State> States { get; private set; }
         public string[] Genders { get; private set; } =
             ["Woman", "Man", "Non-binary", "Other (specify)", "Prefer not to say"];
         // New employee properties
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public DateOnly DateOfBirth { get; set; }
-        public string Gender { get; set; } = string.Empty;
+       
+        
+        private string firstName = string.Empty;
+        [Required]
+        [MaxLength(128)]
+        public string FirstName
+        {
+            get => firstName;
+            set => SetProperty(ref firstName, value, true);
+        }
+        private string lastName = string.Empty;
+        [Required]
+        [MaxLength(128)]
+        public string LastName
+        {
+            get => lastName;
+            set => SetProperty(ref lastName, value, true);
+        }
+
+        
+        private DateOnly? dateOfBirth;
+        [Required]
+        public DateOnly? DateOfBirth
+        {
+            get => dateOfBirth;
+            set => SetProperty(ref dateOfBirth, value, true);
+        }
+        private string gender = string.Empty;
+        [Required]
+        public string Gender
+        {
+            get => gender;
+            set => SetProperty(ref gender, value, true);
+        }
         private string genderOther = string.Empty;
         public string GenderOther
         {
@@ -40,31 +65,39 @@ namespace HRManagementSystem.ViewModels
                 OnPropertyChanged(nameof(GenderOther));
             }
         }
-
-        public string PhoneNumber { get; set; } = string.Empty;
+        private string phoneNumber = string.Empty;
+        [Required]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits.")]
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                SetProperty(ref phoneNumber, value, true);
+            }
+        }
         public string Email { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
-        public State SelectedState { get; set; } = new State();
-        public string ZipCode { get; set; } = string.Empty;
+        
+        private State? selectedState;
+        [Required]
+        public State? SelectedState
+        {
+            get => selectedState;
+            set => SetProperty(ref selectedState, value, true);
+        }
+        private string zipCode = string.Empty;
+        [Required]
+        [RegularExpression(@"^[0-9]{5}", ErrorMessage = "Zip code must be exactly 5 digits.")]
+        public string ZipCode
+        {
+            get => zipCode;
+            set => SetProperty(ref zipCode, value, true);
+        }
+        [ObservableProperty]
         private bool isGenderOtherEnabled;
 
-        public bool IsGenderOtherEnabled
-        {
-            get { return isGenderOtherEnabled; }
-            set 
-            {
-                isGenderOtherEnabled = value;
-                OnPropertyChanged(nameof(IsGenderOtherEnabled));
-            }
-        }
-
-        public bool HasErrors => propertyErrors.Any(kvp => kvp.Value.Count > 0);
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         // Commands
         [RelayCommand]
         private void GenderSelectionChanged(int selectedIndex)
@@ -82,29 +115,14 @@ namespace HRManagementSystem.ViewModels
         [RelayCommand]
         private void AddNewEmployee()
         {
-            Employee employee = this.ToEmployee();
-            UnitOfWork.Employees.Add(employee);
-            UnitOfWork.Complete();
-        }
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            if (propertyName == null)
-                return Enumerable.Empty<string>();
-            return propertyErrors[propertyName];
-        }
-        private void AddError(string propertyName, string errorMessage)
-        {
-            if (!propertyErrors.ContainsKey(propertyName))
+            ValidateAllProperties();
+            if (!HasErrors)
             {
-                propertyErrors[propertyName] = new List<string>();
+                Employee employee = this.ToEmployee();
+                unitOfWork.Employees.Add(employee);
+                unitOfWork.Complete();
             }
-            propertyErrors[propertyName].Add(errorMessage);
-            OnErrorsChanged(propertyName);
-        }
-        private void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+
         }
     }
 }

@@ -8,7 +8,7 @@ namespace HRManagementSystem.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isEmpty && isEmpty)
+            if (value is bool isVisible && isVisible)
                 return Visibility.Visible;
 
             return Visibility.Collapsed;
