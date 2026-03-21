@@ -5,30 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRManagementSystem"
         xmlns:uc="clr-namespace:HRManagementSystem.Controls"
+        xmlns:vm="clr-namespace:HRManagementSystem.ViewModels"
+        xmlns:views="clr-namespace:HRManagementSystem.Views"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="HRIS" Height="450" Width="800">        
+        Title="HRIS" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:DashboardView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:EmployeesViewModel}">
+            <views:EmployeesView />
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="75" MaxWidth="100" Width="1*"/>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="25" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <uc:TopToolbar Grid.Column="0" Grid.ColumnSpan="2" />
-        <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" SelectionMode="Single"
+        <uc:TopToolbar Grid.Column="1" Grid.Row="0" />
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical">
+            <Image Grid.Column="0" Source="{StaticResource ResourceKey=companyLogo}" />
+            <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" SelectionMode="Single"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
                  SelectionChanged="ListBox_SelectionChanged">
-            <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="10" ToolTip="Home" />
-            <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="10" ToolTip="People" NavLink="/Views/EmployeesView.xaml" />
-            <uc:NavButton IconGeometry="{StaticResource clockIcon}" Padding="15,10" ToolTip="Time off" />
-            <uc:NavButton IconGeometry="{StaticResource cashSignIcon}" Padding="5,10" ToolTip="Payroll" />
-            <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="5,10" ToolTip="Benefits" />
-            <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="10" ToolTip="Reports" />
-            <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="10" ToolTip="Edit benefits, job titles, departments, etc."/>
-        </ListBox>
-        <Frame x:Name="navFrame" Grid.Column="1" Grid.Row="1" Background="#E9ECEF" Padding="50" />
-        
+                <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="10" ToolTip="Home" IsSelected="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Selected">
+                            <i:InvokeCommandAction Command="{Binding GoToDashboardCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </uc:NavButton>
+                <uc:NavButton IconGeometry="{StaticResource peopleIcon}" Padding="10" ToolTip="People">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Selected">
+                            <i:InvokeCommandAction Command="{Binding GoToEmployeesCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </uc:NavButton>
+                <uc:NavButton IconGeometry="{StaticResource clockIcon}" Padding="15,10" ToolTip="Time off" />
+                <uc:NavButton IconGeometry="{StaticResource cashSignIcon}" Padding="5,10" ToolTip="Payroll" />
+                <uc:NavButton IconGeometry="{StaticResource heartIcon}" Padding="5,10" ToolTip="Benefits" />
+                <uc:NavButton IconGeometry="{StaticResource reportsIcon}" Padding="10" ToolTip="Reports" />
+                <uc:NavButton IconGeometry="{StaticResource editIcon}" Padding="10" ToolTip="Edit benefits, job titles, departments, etc."/>
+            </ListBox>
+        </StackPanel>
+
+        <ContentPresenter Grid.Column="1" Grid.Row="1" Content="{Binding CurrentViewModel}" />
+
     </Grid>
 </Window>

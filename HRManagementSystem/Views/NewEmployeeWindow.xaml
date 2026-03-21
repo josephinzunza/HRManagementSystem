@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:HRManagementSystem.Views"
         xmlns:uc="clr-namespace:HRManagementSystem.Controls"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:vr="clr-namespace:HRManagementSystem.ViewModels.Validation"
         mc:Ignorable="d"
         Title="Add a New Employee" Height="700" Width="600"
         ResizeMode="NoResize">

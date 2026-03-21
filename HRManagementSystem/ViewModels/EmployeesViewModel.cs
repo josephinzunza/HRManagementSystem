@@ -3,28 +3,19 @@ using System.Collections.ObjectModel;
 
 namespace HRManagementSystem.ViewModels
 {
-    public class EmployeeViewModel
+    public class EmployeesViewModel : IViewModel
     {
-        public byte[] ProfilePicture { get; set; } = [];
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
-        public string Department { get; set; } = string.Empty;
-    }
-
-    public class EmployeesViewModel
-    {
-        private readonly IEmployeeRepository _repository;
+        private readonly IUnitOfWork _unitOfwork;
         public ObservableCollection<EmployeeViewModel> Employees { get; set; } = [];
-        public EmployeesViewModel(IEmployeeRepository repository)
+
+        public EmployeesViewModel(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfwork = unitOfWork;
             LoadData();
         }
         private void LoadData()
         {
-            var data = _repository.GetAllActiveEmployeesWithDeptAndPfp();
+            var data = _unitOfwork.Employees.GetAllActiveEmployeesWithDeptAndPfp();
             foreach(EmployeeViewModel employee in data)
             {
                 Employees.Add(employee);

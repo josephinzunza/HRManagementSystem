@@ -16,11 +16,7 @@ namespace HRManagementSystem
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var sideBar = (ListBox)sender;
-
-            var navButtonClicked = (NavButton)sideBar.SelectedItem;
-
-            navFrame.Navigate(navButtonClicked.NavLink);
+            var sideBar = (ListBox)sender; 
         }
     }
 }

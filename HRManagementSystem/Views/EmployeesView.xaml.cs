@@ -7,13 +7,11 @@ namespace HRManagementSystem.Views
     /// <summary>
     /// Interaction logic for EmployeesView.xaml
     /// </summary>
-    public partial class EmployeesView : Page
+    public partial class EmployeesView : UserControl
     {
         public EmployeesView()
         {
             InitializeComponent();
-
-            DataContext = new EmployeesViewModel(new EmployeeRepository(new HRMSDbContext()));
         }
         private void AddPersonButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
