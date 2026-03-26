@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using HRManagementSystem.Models;
 using HRManagementSystem.Persistence.Repositories;
 using HRManagementSystem.ViewModels.Extensions;
+using HRManagementSystem.ValidationRules;
 using System.ComponentModel.DataAnnotations;
 
 namespace HRManagementSystem.ViewModels
@@ -41,9 +42,11 @@ namespace HRManagementSystem.ViewModels
         }
 
         
-        private DateOnly? dateOfBirth;
+        private string dateOfBirth = string.Empty;
         [Required]
-        public DateOnly? DateOfBirth
+        [MinLength(10)]
+        [DateValidationRule]
+        public string DateOfBirth
         {
             get => dateOfBirth;
             set => SetProperty(ref dateOfBirth, value, true);
@@ -56,12 +59,15 @@ namespace HRManagementSystem.ViewModels
             set => SetProperty(ref gender, value, true);
         }
         private string genderOther = string.Empty;
+        [Required]
+        [MaxLength(30)]
         public string GenderOther
         {
             get { return genderOther; }
             set
             { 
-                genderOther = value;
+                ClearGenderOtherErrors();
+                SetProperty(ref genderOther, value, true);
                 OnPropertyChanged(nameof(GenderOther));
             }
         }
@@ -71,15 +77,32 @@ namespace HRManagementSystem.ViewModels
         public string PhoneNumber
         {
             get => phoneNumber;
-            set
-            {
-                SetProperty(ref phoneNumber, value, true);
-            }
+            set => SetProperty(ref phoneNumber, value, true);
+            
         }
-        public string Email { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        
+        private string email = string.Empty;
+        [Required]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email format.")]
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+        private string address = string.Empty;
+        [Required]
+        public string Address
+        {
+            get { return address; }
+            set => SetProperty(ref address, value, true);
+        }
+        private string city = string.Empty;
+        [Required]
+        public string City
+        {
+            get { return city; }
+            set => SetProperty(ref city, value, true);
+        }
+
         private State? selectedState;
         [Required]
         public State? SelectedState
@@ -109,13 +132,20 @@ namespace HRManagementSystem.ViewModels
             }
             else
             {
+                
                 IsGenderOtherEnabled = true;
             }
+        }
+        private void ClearGenderOtherErrors()
+        {
+            if (!IsGenderOtherEnabled)
+                ClearErrors(nameof(GenderOther));
         }
         [RelayCommand]
         private void AddNewEmployee()
         {
             ValidateAllProperties();
+            ClearGenderOtherErrors();
             if (!HasErrors)
             {
                 Employee employee = this.ToEmployee();

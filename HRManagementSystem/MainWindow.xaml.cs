@@ -13,10 +13,5 @@ namespace HRManagementSystem
         {
             InitializeComponent();
         }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var sideBar = (ListBox)sender; 
-        }
     }
 }

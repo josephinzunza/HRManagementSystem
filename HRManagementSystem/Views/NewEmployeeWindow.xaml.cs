@@ -12,7 +12,7 @@ namespace HRManagementSystem.Views
         public NewEmployeeWindow()
         {
             InitializeComponent();
-
+            
             IUnitOfWork unitOfWork = new UnitOfWork(new HRMSDbContext());
             var viewModel = new NewEmployeeViewModel(unitOfWork);
             DataContext = viewModel;

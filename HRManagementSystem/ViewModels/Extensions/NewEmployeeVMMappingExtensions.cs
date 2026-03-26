@@ -11,7 +11,7 @@ namespace HRManagementSystem.ViewModels.Extensions
             {
                 FirstName = newEmployeeVM.FirstName,
                 LastName = newEmployeeVM.LastName,
-                DateOfBirth = newEmployeeVM.DateOfBirth ?? default,
+                DateOfBirth = DateOnly.Parse(newEmployeeVM.DateOfBirth),
                 Gender = newEmployeeVM.Gender == "Other (specify)" ? newEmployeeVM.GenderOther : newEmployeeVM.Gender,
                 PhoneNumber = newEmployeeVM.PhoneNumber,
                 Email = newEmployeeVM.Email,

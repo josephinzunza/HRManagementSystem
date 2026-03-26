@@ -31,8 +31,7 @@
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical">
             <Image Grid.Column="0" Source="{StaticResource ResourceKey=companyLogo}" />
             <ListBox Grid.Column="0" Grid.Row="1" BorderBrush="Transparent" SelectionMode="Single"
-                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                 SelectionChanged="ListBox_SelectionChanged">
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                 <uc:NavButton IconGeometry="{StaticResource homeIcon}" Padding="10" ToolTip="Home" IsSelected="True">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Selected">
